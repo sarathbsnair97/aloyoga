@@ -15,26 +15,33 @@ export const meta: V2_MetaFunction = ({ data }) => {
   return [{ title: `Hydrogen | ${data.collection.title} Collection` }];
 };
 
-export async function loader({ request, params, context }: LoaderArgs) {
-  const { handle } = params;
+export async function loader({request, params, context}: LoaderArgs) {
+  const {handle} = params;
   const pageBy = 48;
   var sortKey = 'MANUAL';
   var sortReverse = false;
-  const { storefront } = context;
+  const {storefront} = context;
   const url = new URL(request.url);
   sortKey = url.searchParams.get('sortkey');
   sortReverse = url.searchParams.get('reverse') === 'true' ? true : false;
   const paginationVariables = getPaginationVariables(request, {
-    pageBy
+    pageBy,
   });
-  var filterAvailability = url.searchParams.get('availability') === 'true' ? true : url.searchParams.get('availability') === 'false' ? false : 'both';
+  var filterAvailability =
+    url.searchParams.get('availability') === 'true'
+      ? true
+      : url.searchParams.get('availability') === 'false'
+      ? false
+      : 'both';
   if (!handle) {
     return redirect('/collections');
   }
-  const { collection } = await storefront.query(COLLECTION_QUERY, {
+  const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
-      handle, ...paginationVariables, sortKey,
-      sortReverse 
+      handle,
+      ...paginationVariables,
+      sortKey,
+      sortReverse,
     },
   });
 
@@ -118,8 +125,11 @@ function ProductVariant({
   setSize,
   sizeValue,
 }: ProductVariantProps) {
-
-  const handleVariantImage = (url: Maybe<Pick<Image, "url" | "altText" | "width" | "height">> | undefined, color: string, size: string) => {
+  const handleVariantImage = (
+    url: Maybe<Pick<Image, 'url' | 'altText' | 'width' | 'height'>> | undefined,
+    color: string,
+    size: string,
+  ) => {
     if (url) {
       setImage(url as object);
       setColor(color);
@@ -128,37 +138,61 @@ function ProductVariant({
   };
 
   return (
-    <div className='buttoncontainer'>
-      <div className='button-row'>
-        {product.map((variant: { selectedOptions: any[]; image: any; }, index: Key | null | undefined) => {
-          const colorOption = variant.selectedOptions.find((option: { name: string; }) => option.name === 'Color')?.value;
-          const sizeOption = variant.selectedOptions.find((option: { name: string; }) => option.name === 'Size')?.value;
-          const imageURL = variant.image;
-          if (colorOption !== undefined && sizeOption !== undefined) {
-            return (
-              <div key={index} className='buttoncontainer'>
-                <div className='swatches-wrapper'>
-                  <div className='swatches'>
-                    <div style={{ position: 'relative', display: 'grid', placeItems: 'center' }}>
-                      <button
-                        type='button'
-                        className='SwatchUI'
+    <div className="buttoncontainer">
+      <div className="button-row">
+        {product.map(
+          (
+            variant: {selectedOptions: any[]; image: any},
+            index: Key | null | undefined,
+          ) => {
+            const colorOption = variant.selectedOptions.find(
+              (option: {name: string}) => option.name === 'Color',
+            )?.value;
+            const sizeOption = variant.selectedOptions.find(
+              (option: {name: string}) => option.name === 'Size',
+            )?.value;
+            const imageURL = variant.image;
+            if (colorOption !== undefined && sizeOption !== undefined) {
+              return (
+                <div key={index} className="buttoncontainer">
+                  <div className="swatches-wrapper">
+                    <div className="swatches">
+                      <div
                         style={{
-                          backgroundColor: colorOption,
-                          border: '2px solid white',
-                          outline: `2px solid ${colorOption === color && sizeOption === sizeValue ? 'black' : 'white'
-                            }`,
+                          position: 'relative',
+                          display: 'grid',
+                          placeItems: 'center',
                         }}
-                        onClick={() => handleVariantImage(imageURL, colorOption, sizeOption)}
-                      ></button>
+                      >
+                        <button
+                          type="button"
+                          className="SwatchUI"
+                          style={{
+                            backgroundColor: colorOption,
+                            border: '2px solid white',
+                            outline: `2px solid ${
+                              colorOption === color && sizeOption === sizeValue
+                                ? 'black'
+                                : 'white'
+                            }`,
+                          }}
+                          onClick={() =>
+                            handleVariantImage(
+                              imageURL,
+                              colorOption,
+                              sizeOption,
+                            )
+                          }
+                        ></button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          }
-          return null;
-        })}
+              );
+            }
+            return null;
+          },
+        )}
       </div>
     </div>
   );
