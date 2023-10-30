@@ -369,6 +369,140 @@ aside li {
 * routes/collections.$handle.tsx
 * --------------------------------------------------
 */
+
+.buttoncontainer {
+  display: inline-block;
+}
+.SwatchUI {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background-color: initial;
+    border: 2px solid;
+    border-radius: 50%;
+    padding: 0;
+}
+.swatches {
+    margin: 8px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,33px);
+    grid-template-rows: 33px;
+    grid-auto-rows: 0;
+    grid-column-gap: 2px;
+    column-gap: 2px;
+    height: 33px;
+    overflow: hidden;
+    padding-left: 2px;
+}
+.swatches-wrapper {
+    order: -1;
+}
+.plp-header {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 3rem;
+    margin-bottom: 1em;
+}
+.h2 {
+    font-family: var(--secondary-font);
+    font-size: 2.75rem;
+    font-weight: 900;
+    line-height: 1.14;
+    letter-spacing: .0795454545em;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+.wishlist-icon-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    cursor: pointer;
+    padding: 15px 15px 0;
+    content: url("../../public/images/heart.svg");
+    opacity:.7;
+}
+.product-item img {
+    height: auto;
+    width: 83%;
+}
+
+.img-fluid, .img-thumbnail {
+    max-width: 100%;
+    height: auto;
+}
+.img {
+    vertical-align: middle;
+}
+.position-relative {
+    position: relative!important;
+}
+*, :after, :before {
+    box-sizing: inherit;
+}
+div {
+    display: block;
+}
+ .quick-add-dark-mode .quick-add-size-btn:not(.sold-out):hover {
+    background: hsl(0, 0%, 0%);
+}
+.quick-add-dark-mode .quick-add-size-btn {
+    color: #b12a2a;
+}
+
+@media (min-width: 992px) {
+    .quick-add-size-btn.add-to-bag {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-height: 58px;
+    }
+}
+.quick-add-size-btn {
+    border: 1px solid transparent;
+    background-color: initial;
+    padding: 0 5px;
+    min-width: 25px;
+    height: 25px;
+    text-transform: uppercase;
+}
+.quick-add-dark-mode .quick-add-size-btn {
+  font-weight: 200;
+    color: #070606;
+}
+@media (min-width: 992px) {
+    .quick-add-size-btn.add-to-bag {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 95%;
+        min-height: 70px;
+    }
+}
+
+.quick-add-size-btn {
+    border: 1px solid transparent;
+    background-color: initial;
+    padding: 0 5px;
+    min-width: 25px;
+    height: 25px;
+    text-transform: uppercase;
+}
+
+.quick-add-size-btn {
+    border: 1px solid transparent;
+    background-color: initial;
+    padding: 0 5px;
+    min-width: 25px;
+    height: 25px;
+    text-transform: uppercase;
+}
+
+.quick-add-dark-mode .quick-add-size-btn:not(.sold-out):hover {
+   background: hsla(0, 87%, 3%, 0.198);
+}
 .collection-description {
   margin-bottom: 1rem;
   max-width: 95%;
@@ -388,6 +522,66 @@ aside li {
 .product-item img {
   height: auto;
   width: 100%;
+}
+
+/*
+* --------------------------------------------------
+* sort
+* --------------------------------------------------
+*/
+
+.custom-select-box {
+  position: relative;
+  width: 225px; /* Adjust the width as needed */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  left:88%;
+  margin-bottom: 1rem;
+}
+
+.select-header {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.select-header.open {
+  border-bottom: 1px solid #ccc;
+}
+
+.options {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.options li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #f0f0f0;
+}
+
+.options li.selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.options li.selected:hover {
+  background-color: #0056b3;
 }
 
 /*
