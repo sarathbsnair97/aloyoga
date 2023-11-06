@@ -199,10 +199,17 @@ aside li {
 }
 
 .footer-menu {
-  align-items: center;
+  /* align-items: center;
   display: flex;
-  grid-gap: 1rem;
+  justify-content: space-around; */
+  /* grid-gap: 1rem; */
+  display: flex;
+  gap: 8rem;
   padding: 1rem;
+
+  @media (max-width:790px) {
+    flex-direction: column;
+  }
 }
 
 .footer-menu a {
@@ -920,3 +927,65 @@ header nav>.header-menu.active>.drop-down {
   margin-left: -15px;
   margin-bottom: ;
 } */
+.footer-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-styles {
+  line-height: 1.35;
+  box-sizing: border-box;
+  border: 1px solid var(--white);
+  font-size: .9375rem;
+  /* padding: 13px 22px; */
+  width: 35px;
+  height: 38px;
+  color: #000;
+}
+
+.sign-up-newsletter-block {
+  margin-top: 15px;
+  font-weight: bold;
+  color: white;
+  width: 22rem;
+}
+
+.third-block {
+  margin-top: 15px;
+  font-weight: bold;
+  color: white;
+  width: 10rem;
+  margin-left: 0rem;
+}
+
+.footer-second-section {
+  width: 20rem;
+  font-weight: 1;
+  color: #fff;
+
+  @media(min-width: 1175px) {
+    margin-left: 4.5rem
+  }
+}
+
+.third-block-list {
+  list-style-type: none
+}
+
+.footer-main-second-block {
+  color: #fff;
+  margin-top: 10px;
+
+  @media (min-width: 1175px) {
+    margin-left: 4.5rem;
+  }
+}
+
+.follow-us-section {
+  margin-top: 10px;
+}
+
+.icon-styling {
+  padding-top: 10px;
+  margin-right: 2rem;
+}
