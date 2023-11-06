@@ -111,8 +111,8 @@ const Carousel: React.FC<CarouselProps> = ({ url }) => {
   return (
     <Image
       data={url}
-      aspectRatio="1/7"
-      sizes="(min-width: 500em) 20vw, 50vw"
+      aspectRatio="1/3.5"
+      sizes="(min-width: 400em) 20vw, 50vw"
       />
   );
 };
