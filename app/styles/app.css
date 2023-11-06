@@ -6,7 +6,7 @@
   --header-height: 64px;
   --color-dark: #000;
   --color-light: #fff;
-  --primary-font: "proxima-nova", Arial, sans-serif;
+  --primary-font: "arquitecta", Arial, sans-serif;
   --secondary-font: "arquitecta", Arial, sans-serif;
 }
 
@@ -19,6 +19,27 @@ img {
 * components/Aside
 * --------------------------------------------------
 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-family: "Arquitecta" !important;
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: calc(var(--font-heading-scale) * 0.06rem);
+  color: rgb(var(--color-foreground));
+  line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale)));
+  word-break: break-word;
+}
+
 aside {
   background: var(--color-light);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
@@ -798,6 +819,7 @@ div {
 } */
 
 header nav>.header-menu>.drop-down {
+  font-family: "Arquitecta" !important;
   position: absolute;
   width: 100%;
   margin-top: 12px;
