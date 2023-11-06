@@ -36,10 +36,10 @@ export default function Homepage() {
   const bannerTwo = data?.imageDetails[1]?.image;
   return (
     <div className="home">
-      <Carousel url={bannerOne}/>
+      <Carousel url={bannerOne} link={ "men"} />
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
-      <Carousel url={bannerTwo}/>
+      <Carousel url={bannerTwo} link={"women"} />
     </div>
   );
 }
@@ -105,15 +105,20 @@ function RecommendedProducts({
 
 type CarouselProps = {
   url: any;
+  link: any;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ url }) => {
+const Carousel: React.FC<CarouselProps> = ({ url,link}) => {
   return (
+    <Link
+      to={`/collections/${link}`}
+    >
     <Image
       data={url}
-      aspectRatio="1/3.5"
+      aspectRatio="1/4"
       sizes="(min-width: 400em) 20vw, 50vw"
       />
+      </Link>
   );
 };
 
