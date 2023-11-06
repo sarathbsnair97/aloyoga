@@ -1,0 +1,11 @@
+/* custom-font.css */
+
+@font-face {
+    font-family: 'Arquitecta';
+    font-style: bold;
+    /* font-display: swap; */
+    font-weight: 400;
+    src: url('/fonts/ArquitectaBold.woff2');
+    src: local(''),
+    url('/fonts/ArquitectaBold.woff2') format('woff2')
+  }

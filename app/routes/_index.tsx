@@ -21,6 +21,10 @@ export async function loader({context}: LoaderArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  const bannerCollections =  await storefront.query(BANNER_COLLECTION_QUERY);
+  const bannerCollection = bannerCollections.collections.nodes[0];
+console.log("BannerCollection=======",bannerCollection);
+console.log("featuredCollection=======",featuredCollection);
 
   return defer({featuredCollection, recommendedProducts});
 }
@@ -144,6 +148,29 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     products(first: 4, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...RecommendedProduct
+      }
+    }
+  }
+` as const;
+
+const BANNER_COLLECTION_QUERY = `#graphql
+  fragment BannerCollection on Collection {
+    id
+    title
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+    handle
+  }
+  query BannerCollection($country: CountryCode, $language: LanguageCode)
+    @inContext(country: $country, language: $language) {
+    collections(first: 3, query: "title:'Banner'") {
+      nodes {
+        ...BannerCollection
       }
     }
   }
