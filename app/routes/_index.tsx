@@ -205,3 +205,26 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     }
   }
 ` as const;
+
+const BANNER_COLLECTION_QUERY = `#graphql
+  fragment BannerCollection on Collection {
+    id
+    title
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+    handle
+  }
+  query BannerCollection($country: CountryCode, $language: LanguageCode)
+    @inContext(country: $country, language: $language) {
+    collections(first: 3, query: "title:'Banner'") {
+      nodes {
+        ...BannerCollection
+      }
+    }
+  }
+` as const;

@@ -19,6 +19,7 @@ import type {HydrogenSession} from '../server';
 import favicon from '../public/favicon.svg';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
+import font from '../public/fonts/font.css';
 import {Layout} from '~/components/Layout';
 
 // This is important to avoid re-fetching root queries on sub-navigations
@@ -44,6 +45,7 @@ export function links() {
   return [
     {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
+    {rel: 'stylesheet', href: font},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
