@@ -21,16 +21,25 @@ export async function loader({context}: LoaderArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-
-  return defer({featuredCollection, recommendedProducts});
+  const bannerImages = await storefront.query(HOMEPAGE_SEO_QUERY, {
+    variables: {
+      handle: 'banner-image',
+    },
+  });
+  const imageDetails = bannerImages?.aloyoga?.banner_images?.references?.nodes;
+  return defer({ featuredCollection, recommendedProducts, imageDetails });
 }
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
+  const bannerOne = data?.imageDetails[0]?.image;
+  const bannerTwo = data?.imageDetails[1]?.image;
   return (
     <div className="home">
+      <Carousel url={bannerOne}/>
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
+      <Carousel url={bannerTwo}/>
     </div>
   );
 }
@@ -52,7 +61,6 @@ function FeaturedCollection({
           <Image data={image} sizes="100vw" />
         </div>
       )}
-      <h1>{collection.title}</h1>
     </Link>
   );
 }
@@ -61,7 +69,7 @@ function RecommendedProducts({
   products,
 }: {
   products: Promise<RecommendedProductsQuery>;
-}) {
+  }) {
   return (
     <div className="recommended-products">
       <h2>Recommended Products</h2>
@@ -94,6 +102,55 @@ function RecommendedProducts({
     </div>
   );
 }
+
+type CarouselProps = {
+  url: any;
+};
+
+const Carousel: React.FC<CarouselProps> = ({ url }) => {
+  return (
+    <Image
+      data={url}
+      aspectRatio="1/7"
+      sizes="(min-width: 500em) 20vw, 50vw"
+      />
+  );
+};
+
+const COLLECTION_CONTENT_FRAGMENT = `#graphql
+  fragment CollectionContent on Collection {
+    id
+    handle
+    title
+    descriptionHtml
+     banner_images: metafield(namespace: "aloyoga", key: "banner_images") { 
+         id
+        namespace
+        key
+        value
+        type 
+     references (first: 10){
+          nodes {
+            ... on MediaImage {
+              image {
+              url
+              }
+            }
+          }
+        }
+    }
+  }
+`;
+
+const HOMEPAGE_SEO_QUERY = `#graphql
+  ${COLLECTION_CONTENT_FRAGMENT}
+  query collectionContent($handle: String, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    aloyoga: collection(handle: $handle) {
+      ...CollectionContent
+    }
+  }
+`;
 
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
