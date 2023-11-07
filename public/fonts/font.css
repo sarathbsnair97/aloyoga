@@ -5,7 +5,7 @@
     font-style: bold;
     /* font-display: swap; */
     font-weight: 400;
-    src: url(`{{ 'ArquitectaBold.woff2' | asset_url }}`);
+    src: url('ArquitectaBold.woff2');
     src: local(''),
-    url(`{{ 'ArquitectaBold.woff2' | asset_url }}`) format('woff2')
+    url('ArquitectaBold.woff2') format('woff2')
   }
