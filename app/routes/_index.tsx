@@ -27,7 +27,6 @@ export async function loader({context}: LoaderArgs) {
       handle: 'banner-image',
     },
   });
-  console.log(bannerImages?.aloyoga?.banner_video?.reference.sources[1].url);
   const imageDetails = bannerImages?.aloyoga?.banner_images?.references?.nodes;
   const videoDetails = bannerImages?.aloyoga?.banner_video?.reference;
   return defer({ featuredCollection, recommendedProducts, imageDetails, videoDetails });
@@ -52,7 +51,6 @@ type SpreadMediaProps = {
   width: number;
 };
 const SpreadMedia: React.FC<SpreadMediaProps> = ({ url, scale, width }) => {
-  console.log("locc", url);
 
   return (
     <Link to={`/collections/men`}>
