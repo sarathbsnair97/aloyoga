@@ -118,6 +118,7 @@ export function HeaderMenu({
                       key={submenu.id}
                       onClick={closeAside}
                       prefetch="intent"
+                      target={submenu.url}
                       style={activeItemStyle}
                       to={url}
                     >
