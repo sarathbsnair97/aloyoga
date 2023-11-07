@@ -11,6 +11,7 @@ import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
+import { Video } from '@shopify/hydrogen';
 
 export const meta: V2_MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -26,8 +27,10 @@ export async function loader({context}: LoaderArgs) {
       handle: 'banner-image',
     },
   });
+  console.log(bannerImages?.aloyoga?.banner_video?.reference.sources[1].url);
   const imageDetails = bannerImages?.aloyoga?.banner_images?.references?.nodes;
-  return defer({ featuredCollection, recommendedProducts, imageDetails });
+  const videoDetails = bannerImages?.aloyoga?.banner_video?.reference;
+  return defer({ featuredCollection, recommendedProducts, imageDetails, videoDetails });
 }
 
 export default function Homepage() {
@@ -36,13 +39,35 @@ export default function Homepage() {
   const bannerTwo = data?.imageDetails[1]?.image;
   return (
     <div className="home">
-      <Carousel url={bannerOne} link={ "men"} />
+      <SpreadMedia url={data.videoDetails} scale={2} width={800} />
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
-      <Carousel url={bannerTwo} link={"women"} />
+      <Carousel url={bannerOne} link={"women"} />
     </div>
   );
 }
+type SpreadMediaProps = {
+  url: any;
+  scale: number;
+  width: number;
+};
+const SpreadMedia: React.FC<SpreadMediaProps> = ({ url, scale, width }) => {
+  console.log("locc", url);
+
+  return (
+    <Link to={`/collections/men`}>
+      <Video
+        data={url}
+        width={scale * width}
+        controls={false}
+        muted
+        loop
+        playsInline
+        autoPlay
+      />
+      </Link>
+    );
+  }
 
 function FeaturedCollection({
   collection,
@@ -122,12 +147,70 @@ const Carousel: React.FC<CarouselProps> = ({ url,link}) => {
   );
 };
 
+ const MEDIA_FRAGMENT = `#graphql
+  fragment Media on Media {
+    __typename
+    mediaContentType
+    alt
+    previewImage {
+      url
+    }
+    ... on MediaImage {
+      id
+      image {
+        url
+        width
+        height
+      }
+    }
+    ... on Video {
+      id
+      sources {
+        mimeType
+        url
+      }
+    }
+    ... on Model3d {
+      id
+      sources {
+        mimeType
+        url
+      }
+    }
+    ... on ExternalVideo {
+      id
+      embedUrl
+      host
+    }
+  }
+`;
+ const VIDEO_FRAGMENT = `#graphql
+  fragment Video on Video {
+    alt
+    id
+    mediaContentType
+    previewImage {
+      url
+    }
+    sources {
+      mimeType
+      url
+    }
+  }
+`;
+
 const COLLECTION_CONTENT_FRAGMENT = `#graphql
+${ MEDIA_FRAGMENT}
   fragment CollectionContent on Collection {
     id
     handle
     title
     descriptionHtml
+     banner_video: metafield(namespace: "aloyoga", key: "banner_video") {
+        reference {
+            ...Media
+          }
+    }
      banner_images: metafield(namespace: "aloyoga", key: "banner_images") { 
          id
         namespace
