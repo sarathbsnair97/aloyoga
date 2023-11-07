@@ -104,7 +104,7 @@ export function HeaderMenu({
 
             {item.items.length > 0 && (
               <div className='drop-down' key={"drop-down--" + item.id} onMouseLeave={DropdownOut}>
-                {item.items.map((submenu) => {                  
+                {item.items.map((submenu) => {
                   if (!submenu.url) return null;
                   // if the url is internal, we strip the domain
                   const url =
