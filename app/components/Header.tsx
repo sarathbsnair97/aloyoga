@@ -96,7 +96,7 @@ export function HeaderMenu({
               prefetch="intent"
               style={activeLinkStyle}
               to={url}
-              target={item.url}
+              target={"_self"}
               onMouseEnter={TopMenuHover}
             >
               {item.title}
@@ -118,7 +118,7 @@ export function HeaderMenu({
                       key={submenu.id}
                       onClick={closeAside}
                       prefetch="intent"
-                      target={submenu.url}
+                      target={"_self"}
                       style={activeItemStyle}
                       to={url}
                     >
