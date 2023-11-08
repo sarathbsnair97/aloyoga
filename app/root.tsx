@@ -20,6 +20,9 @@ import favicon from '../public/favicon.svg';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
 import font from '../public/fonts/font.css';
+import swiperStyle from "swiper/css";
+import swiperPaginationStyle from "swiper/css/pagination";
+import swiperNaginationStyle from "swiper/css/navigation";
 import {Layout} from '~/components/Layout';
 
 // This is important to avoid re-fetching root queries on sub-navigations
@@ -45,7 +48,10 @@ export function links() {
   return [
     {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
-    {rel: 'stylesheet', href: font},
+    { rel: 'stylesheet', href: font },
+    { rel: 'stylesheet', href: swiperStyle },
+    { rel: 'stylesheet', href: swiperPaginationStyle },
+    { rel: 'stylesheet', href: swiperNaginationStyle },
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
