@@ -22,7 +22,6 @@ const ProductCard = (imgUrl: any) => {
           <div className="quick-add-carousel-images normal ls-is-cached lazyloaded">
             <Image
               data={imgUrl.imgUrl}
-              aspectRatio="1/1.3"
               sizes="(min-width: 45em) 400px, 100vw"
             />
           </div>

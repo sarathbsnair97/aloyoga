@@ -44,7 +44,7 @@ export default function Homepage() {
     <>
       <div className="home">
         <Carousel url={data?.imageDetails} />
-        <SpreadMedia url={data.videoDetails} scale={2.6} width={800} />
+        <SpreadMedia url={data.videoDetails}/>
         <FeaturedCollection collection={data.featuredCollection} />
         <RecommendedProducts products={data.recommendedProducts} />
       </div>
@@ -53,23 +53,20 @@ export default function Homepage() {
 }
 type SpreadMediaProps = {
   url: any;
-  scale: number;
-  width: number;
 };
-const SpreadMedia: React.FC<SpreadMediaProps> = ({ url, scale, width }) => {
+const SpreadMedia: React.FC<SpreadMediaProps> = ({ url }) => {
 
   return (
     <Section>
     <Link to={`/collections/men`}>
       <Video
         data={url}
-        width={scale * width}
+        width={"100%"}
         controls={false}
         muted
         loop
         playsInline
         autoPlay
-        className="block object-cover w-full h-full"
       />
       </Link>
       </Section>
@@ -152,7 +149,7 @@ const Carousel: React.FC<CarouselProps> = ({ url }) => {
                 <SwiperSlide>
                   <Image
                     data={item.image}
-                    aspectRatio='4'
+                    width={"100%"}
                   />
                 </SwiperSlide>
               )
