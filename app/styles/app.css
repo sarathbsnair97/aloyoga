@@ -301,16 +301,36 @@ aside li {
 .predictive-search {
   height: calc(100vh - var(--header-height) - 40px);
   overflow-y: auto;
+  background-color: white;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: fit-content;
+  min-height: 5rem;
+
+  /* transition-property: border-radius; */
+
 }
 
 .predictive-search-form {
-  background: var(--color-light);
+  /* background: var(--color-light); */
   position: sticky;
-  top: 0;
+  top: 1rem;
+  position: absolute;
+  width: 100%;
 }
 
 .predictive-search-result {
   margin-bottom: 2rem;
+  margin-top: 5rem;
+  padding: 1rem;
 }
 
 .predictive-search-result h5 {
@@ -338,7 +358,28 @@ aside li {
 .search-results-item {
   margin-bottom: 0.5rem;
 }
+.predictive-search-results {
+  width: 50%;
+  padding: 1.5rem;
+  background: #f2f2f2;
+  margin-top: 0;
+  position: fixed;
+  display: block;
+  left: 25%;
+  margin: 0;
+  z-index: 1;
+  border-radius: 10px;
+}
+.searchResultBlock{
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+}
 
+.searchOverlay{
+  opacity: 1;
+  animation: animateMenuOpen var(--duration-default) ease;
+}
 /*
 * --------------------------------------------------
 * routes/__index
@@ -1010,4 +1051,20 @@ header nav>.header-menu.active>.drop-down {
 .icon-styling {
   padding-top: 10px;
   margin-right: 2rem;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  content: url("../../public/images/closeIcon.svg");
+  cursor: pointer;
+  margin-top: 2%;
+}
+.searchInput{
+  width: 100%;
+}
+.searchBlock{
+  width: 35rem;
+  display: flex;
 }

@@ -2,11 +2,11 @@ import { Await, NavLink, useMatches } from '@remix-run/react';
 import { Suspense } from 'react';
 import type { LayoutProps } from './Layout';
 
-type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
+type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn' | 'showCart'>;
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({ header, isLoggedIn, cart }: HeaderProps) {
+export function Header({ header, isLoggedIn, cart, showCart }: HeaderProps) {
   const { shop, menu, } = header;
   return (
     <header className="header">
@@ -17,7 +17,7 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
         </svg>
       </NavLink>
       <HeaderMenu menu={menu} viewport="desktop" />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} showCart={showCart} />
       <div className="inner">&nbsp;</div>
     </header>
   );
@@ -26,7 +26,7 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
 
 export function HeaderMenu({
   menu,
-  viewport,
+  viewport
 }: {
   menu: HeaderProps['header']['menu'];
   viewport: Viewport;
@@ -138,11 +138,12 @@ export function HeaderMenu({
 function HeaderCtas({
   isLoggedIn,
   cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+  showCart
+}: Pick<HeaderProps, 'isLoggedIn' | 'cart' | 'showCart'>) {
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
-      <SearchToggle />
+      <SearchToggle showCart={showCart} />
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <div id='userLogoDiv'>
           <img className='userLogo' />&nbsp;{isLoggedIn ? 'Account' : 'SIGN IN TO GET REWARDS'}
@@ -161,8 +162,8 @@ function HeaderMenuMobileToggle() {
   );
 }
 
-function SearchToggle() {
-  return <a href='#search-aside'><img className="searchIcon" /></a>;
+function SearchToggle({ showCart }: { showCart: () => void }) {
+  return <a href='#search-aside'><img className="searchIcon" onClick={showCart} /></a>;
 }
 
 function CartBadge({ count }: { count: number }) {

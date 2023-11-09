@@ -307,7 +307,7 @@ export function PredictiveSearchResults() {
   }
   return (
     <div className="predictive-search-results">
-      <div>
+      <div className="searchResultBlock">
         {results.map(({type, items}) => (
           <PredictiveSearchResult
             goToSearchResult={goToSearchResult}

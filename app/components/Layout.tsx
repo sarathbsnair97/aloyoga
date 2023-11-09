@@ -1,5 +1,5 @@
 import {Await} from '@remix-run/react';
-import {Suspense} from 'react';
+import {Suspense, useState } from 'react';
 import type {
   CartApiQueryFragment,
   FooterQuery,
@@ -20,6 +20,7 @@ export type LayoutProps = {
   footer: Promise<FooterQuery>;
   header: HeaderQuery;
   isLoggedIn: boolean;
+  showCart: () => void;
 };
 
 export function Layout({
@@ -27,14 +28,18 @@ export function Layout({
   children = null,
   footer,
   header,
-  isLoggedIn,
+  isLoggedIn
 }: LayoutProps) {
+  const [show, setShow] = useState(false);
+  const showCart = ()=>{
+    setShow(!show);
+  }
   return (
     <>
       <CartAside cart={cart} />
-      <SearchAside />
+      {show && <SearchAside showCart={showCart}/>}
       <MobileMenuAside menu={header.menu} />
-      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} showCart={showCart}/>
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
@@ -59,15 +64,16 @@ function CartAside({cart}: {cart: LayoutProps['cart']}) {
   );
 }
 
-function SearchAside() {
+function SearchAside({showCart}:{showCart: () => void}) {
   return (
-    <Aside id="search-aside" heading="SEARCH">
+    <div id="search-aside" className="searchOverlay">
       <div className="predictive-search">
         <br />
         <PredictiveSearchForm>
           {({fetchResults, inputRef}) => (
-            <div>
+            <div className="searchBlock">
               <input
+              className="searchInput"
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
@@ -76,13 +82,13 @@ function SearchAside() {
                 type="search"
               />
               &nbsp;
-              <button type="submit">Search</button>
+              <img className="closeIcon" onClick={showCart} />
             </div>
           )}
         </PredictiveSearchForm>
-        <PredictiveSearchResults />
       </div>
-    </Aside>
+      <PredictiveSearchResults />
+    </div>
   );
 }
 
