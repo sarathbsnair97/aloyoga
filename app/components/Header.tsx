@@ -163,7 +163,7 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle({ showCart }: { showCart: () => void }) {
-  return <a href='#search-aside'><img className="searchIcon" onClick={showCart} /></a>;
+  return <img className="searchIcon" onClick={showCart} />;
 }
 
 function CartBadge({ count }: { count: number }) {
