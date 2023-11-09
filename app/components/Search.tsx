@@ -307,7 +307,7 @@ export function PredictiveSearchResults() {
   }
   return (
     <div className="predictive-search-results">
-      <div>
+      <div className="searchResultBlock">
         {results.map(({type, items}) => (
           <PredictiveSearchResult
             goToSearchResult={goToSearchResult}
@@ -340,9 +340,11 @@ function NoPredictiveSearchResults({
     return null;
   }
   return (
-    <p>
-      No results found for <q>{searchTerm.current}</q>
-    </p>
+    <div className="search-no-results">
+      <p>
+        No results found for <q>{searchTerm.current}</q>
+      </p>
+    </div>
   );
 }
 
