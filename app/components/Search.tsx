@@ -319,14 +319,14 @@ export function PredictiveSearchResults() {
         ))}
       </div>
       {/* view all results /search?q=term */}
-      {searchTerm.current && (
+      {/* {searchTerm.current && (
         <Link onClick={goToSearchResult} to={`/search?q=${searchTerm.current}`}>
           <p>
             View all results for <q>{searchTerm.current}</q>
             &nbsp; →
           </p>
         </Link>
-      )}
+      )}*/}
     </div>
   );
 }
