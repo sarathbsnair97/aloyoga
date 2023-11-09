@@ -1,4 +1,5 @@
-import {defer, type LoaderArgs} from '@shopify/remix-oxygen';
+import { defer, type LoaderArgs } from '@shopify/remix-oxygen';
+import React from 'react';
 import {
   Await,
   useLoaderData,
@@ -12,6 +13,9 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import { Video } from '@shopify/hydrogen';
+import { SwiperSlide, Swiper } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import { Section } from '~/components/elements/Section';
 
 export const meta: V2_MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -37,26 +41,27 @@ export default function Homepage() {
   const bannerOne = data?.imageDetails[0]?.image;
   const bannerTwo = data?.imageDetails[1]?.image;
   return (
-    <div className="home">
-      <SpreadMedia url={data.videoDetails} scale={2} width={800} />
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
-      <Carousel url={bannerOne} link={"women"} />
-    </div>
+    <>
+      <div className="home">
+        <Carousel url={data?.imageDetails} />
+        <SpreadMedia url={data.videoDetails}/>
+        <FeaturedCollection collection={data.featuredCollection} />
+        <RecommendedProducts products={data.recommendedProducts} />
+      </div>
+    </>
   );
 }
 type SpreadMediaProps = {
   url: any;
-  scale: number;
-  width: number;
 };
-const SpreadMedia: React.FC<SpreadMediaProps> = ({ url, scale, width }) => {
+const SpreadMedia: React.FC<SpreadMediaProps> = ({ url }) => {
 
   return (
+    <Section>
     <Link to={`/collections/men`}>
       <Video
         data={url}
-        width={scale * width}
+        width={"100%"}
         controls={false}
         muted
         loop
@@ -64,6 +69,7 @@ const SpreadMedia: React.FC<SpreadMediaProps> = ({ url, scale, width }) => {
         autoPlay
       />
       </Link>
+      </Section>
     );
   }
 
@@ -94,8 +100,9 @@ function RecommendedProducts({
   products: Promise<RecommendedProductsQuery>;
   }) {
   return (
+    <Section>
     <div className="recommended-products">
-      <h2>Recommended Products</h2>
+      <h2 className='pb-1'>Recommended Products</h2>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {({products}) => (
@@ -119,29 +126,38 @@ function RecommendedProducts({
               ))}
             </div>
           )}
-        </Await>
-      </Suspense>
-      <br />
-    </div>
+          </Await>
+        </Suspense>
+        <br />
+      </div>
+    </Section>
   );
 }
 
 type CarouselProps = {
   url: any;
-  link: any;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ url,link}) => {
+const Carousel: React.FC<CarouselProps> = ({ url }) => {
   return (
-    <Link
-      to={`/collections/${link}`}
-    >
-    <Image
-      data={url}
-      aspectRatio="1/4"
-      sizes="(min-width: 400em) 20vw, 50vw"
-      />
-      </Link>
+    <div className="custom-section">
+      <Section>
+        <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+          {
+            url.map((item) => {
+              return (
+                <SwiperSlide>
+                  <Image
+                    data={item.image}
+                    width={"100%"}
+                  />
+                </SwiperSlide>
+              )
+            })
+          }
+        </Swiper>
+      </Section>
+    </div>
   );
 };
 
