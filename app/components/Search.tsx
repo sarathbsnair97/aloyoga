@@ -340,9 +340,11 @@ function NoPredictiveSearchResults({
     return null;
   }
   return (
-    <p>
-      No results found for <q>{searchTerm.current}</q>
-    </p>
+    <div className="search-no-results">
+      <p>
+        No results found for <q>{searchTerm.current}</q>
+      </p>
+    </div>
   );
 }
 

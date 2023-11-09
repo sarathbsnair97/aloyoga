@@ -382,6 +382,20 @@ aside li {
   opacity: 1;
   animation: animateMenuOpen var(--duration-default) ease;
 }
+
+.search-no-results{
+  width: 50%;
+  padding: 1.5rem;
+  background: #fff;
+  position: fixed;
+  display: block;
+  left: 25%;
+  margin: 0;
+  z-index: 9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #0000, 0 6px 20px #00000040;
+  margin-top: 4rem;
+}
 /*
 * --------------------------------------------------
 * routes/__index
