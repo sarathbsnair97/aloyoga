@@ -1,14 +1,14 @@
-import {Await} from '@remix-run/react';
-import {Suspense, useState } from 'react';
+import { Await } from '@remix-run/react';
+import { Suspense, useState } from 'react';
 import type {
   CartApiQueryFragment,
   FooterQuery,
   HeaderQuery,
 } from 'storefrontapi.generated';
-import {Aside} from '~/components/Aside';
-import {Footer} from '~/components/Footer';
-import {Header, HeaderMenu} from '~/components/Header';
-import {CartMain} from '~/components/Cart';
+import { Aside } from '~/components/Aside';
+import { Footer } from '~/components/Footer';
+import { Header, HeaderMenu } from '~/components/Header';
+import { CartMain } from '~/components/Cart';
 import {
   PredictiveSearchForm,
   PredictiveSearchResults,
@@ -31,15 +31,15 @@ export function Layout({
   isLoggedIn
 }: LayoutProps) {
   const [show, setShow] = useState(false);
-  const showCart = ()=>{
+  const showCart = () => {
     setShow(!show);
   }
   return (
     <>
       <CartAside cart={cart} />
-      {show && <SearchAside showCart={showCart}/>}
+      {show && <SearchAside showCart={showCart} />}
       <MobileMenuAside menu={header.menu} />
-      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} showCart={showCart}/>
+      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} showCart={showCart} />
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
@@ -50,9 +50,9 @@ export function Layout({
   );
 }
 
-function CartAside({cart}: {cart: LayoutProps['cart']}) {
+function CartAside({ cart }: { cart: LayoutProps['cart'] }) {
   return (
-    <Aside id="cart-aside" heading="CART">
+    <Aside id="cart-aside" heading="SHOPPING BAG" classStyle='cart-heading-styles'>
       <Suspense fallback={<p>Loading cart ...</p>}>
         <Await resolve={cart}>
           {(cart) => {
@@ -64,16 +64,16 @@ function CartAside({cart}: {cart: LayoutProps['cart']}) {
   );
 }
 
-function SearchAside({showCart}:{showCart: () => void}) {
+function SearchAside({ showCart }: { showCart: () => void }) {
   return (
     <div id="search-aside" className="searchOverlay">
       <div className="predictive-search">
         <br />
         <PredictiveSearchForm>
-          {({fetchResults, inputRef}) => (
+          {({ fetchResults, inputRef }) => (
             <div className="searchBlock">
               <input
-              className="searchInput"
+                className="searchInput"
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
@@ -92,7 +92,7 @@ function SearchAside({showCart}:{showCart: () => void}) {
   );
 }
 
-function MobileMenuAside({menu}: {menu: HeaderQuery['menu']}) {
+function MobileMenuAside({ menu }: { menu: HeaderQuery['menu'] }) {
   return (
     <Aside id="mobile-menu-aside" heading="MENU">
       <HeaderMenu menu={menu} viewport="mobile" />

@@ -12,10 +12,12 @@ export function Aside({
   children,
   heading,
   id = 'aside',
+  classStyle
 }: {
   children?: React.ReactNode;
   heading: React.ReactNode;
   id?: string;
+  classStyle: string;
 }) {
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
@@ -28,7 +30,7 @@ export function Aside({
       />
       <aside>
         <header>
-          <h3>{heading}</h3>
+          <h3 className={classStyle ? classStyle : ''}>{heading}</h3>
           <CloseAside />
         </header>
         <main>{children}</main>
