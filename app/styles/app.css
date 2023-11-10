@@ -6,7 +6,7 @@
   --header-height: 64px;
   --color-dark: #000;
   --color-light: #fff;
-  --primary-font: "arquitecta", Arial, sans-serif;
+  --primary-font: "proxima-nova", Arial, sans-serif;
   --secondary-font: "arquitecta", Arial, sans-serif;
 }
 
@@ -1238,6 +1238,7 @@ header nav>.header-menu.active>.drop-down {
   letter-spacing: .03125em;
   color: #605e5c;
   margin-bottom: 15px;
+  font-size: 0.9rem !important;
 }
 
 .checkout-button-styles {
