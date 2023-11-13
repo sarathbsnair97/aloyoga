@@ -245,7 +245,7 @@ aside li {
 .cart-main {
   height: 100%;
   max-height: calc(100vh - var(--cart-aside-summary-height));
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: auto;
 }
 
