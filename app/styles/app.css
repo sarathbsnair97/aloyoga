@@ -655,13 +655,14 @@ div {
 * --------------------------------------------------
 */
 
+
 .custom-select-box {
   position: relative;
   width: 225px;
   /* Adjust the width as needed */
   border: 1px solid #ccc;
   border-radius: 4px;
-  left: 88%;
+  left: 80%;
   margin-bottom: 1rem;
 }
 
@@ -710,6 +711,18 @@ div {
   background-color: #0056b3;
 }
 
+@media screen and (max-width: 600px) {
+  .custom-select-box {
+  position: relative;
+  width: 200px;
+  /* Adjust the width as needed */
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  left: 20%;
+  margin-bottom: 1rem;
+}
+}
 /*
 * --------------------------------------------------
 * routes/products.$handle.tsx
