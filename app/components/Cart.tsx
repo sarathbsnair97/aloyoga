@@ -20,18 +20,15 @@ export function CartMain({ layout, cart }: CartMainProps) {
     cart &&
     Boolean(cart.discountCodes.filter((code) => code.applicable).length);
   const className = `cart-main ${withDiscount ? 'with-discount' : ''}`;
-
   return (
     <div className={className}>
-      {/* <CartEmpty hidden={linesCount} layout={layout} /> */}
-      <CartDetails cart={cart} layout={layout} />
+      {linesCount ? <CartDetails cart={cart} layout={layout} /> : <CartEmpty hidden={linesCount} layout={layout} />}
     </div>
   );
 }
 
 function CartDetails({ layout, cart }: CartMainProps) {
   const cartHasItems = !!cart && cart.totalQuantity > 0;
-
   return (
     <>
       <div className="cart-details">
@@ -43,8 +40,8 @@ function CartDetails({ layout, cart }: CartMainProps) {
           </CartSummary>
         )}
       </div>
-      <CartDropDown />
-      <ReturnBlock />
+      {/* <CartDropDown />
+      <ReturnBlock /> */}
     </>
   );
 }
@@ -108,7 +105,7 @@ function CartLineItem({
           </h5>
         </Link>
         <CartLinePrice line={line} as="span" />
-        <ul>
+        <ul className='list-styles'>
           {selectedOptions.map((option) => (
             <li key={option.name}>
               <span className='cart-details'>
@@ -237,28 +234,27 @@ function CartLinePrice({
   }
 
   return (
-    <div className='price'>
+    <div className='price price-styles'>
       <Money withoutTrailingZeros {...passthroughProps} data={moneyV2} />
     </div>
   );
 }
 
 export function CartEmpty({
-  hidden = false,
+  hidden = true,
   layout = 'aside',
 }: {
   hidden: boolean;
   layout?: CartMainProps['layout'];
 }) {
   return (
-    <div hidden={hidden}>
-      <br />
-      <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
-      </p>
-      <br />
-      <Link
+    <div className='empty-cart-styles' hidden={hidden}>
+      <h2 className='empty-heading-styles'>
+        Your Bag is Empty
+      </h2>
+      <hr style={{ borderColor: '#ccc' }} />
+      <p className='empty-paragraph-styles'>Free worldwide shipping and easy returns</p>
+      {/* <Link
         to="/collections"
         onClick={() => {
           if (layout === 'aside') {
@@ -267,7 +263,7 @@ export function CartEmpty({
         }}
       >
         Continue shopping →
-      </Link>
+      </Link> */}
     </div>
   );
 }
