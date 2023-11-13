@@ -26,7 +26,6 @@ export const meta: V2_MetaFunction = () => {
 export async function loader({context}: LoaderArgs) {
   const {storefront} = context;
   const { collections } = await storefront.query(COLLECTIONS_QUERY);
-  console.log("collections", collections);
   const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const bannerImages = await storefront.query(HOMEPAGE_SEO_QUERY, {
