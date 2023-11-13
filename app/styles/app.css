@@ -655,13 +655,14 @@ div {
 * --------------------------------------------------
 */
 
+
 .custom-select-box {
   position: relative;
   width: 225px;
   /* Adjust the width as needed */
   border: 1px solid #ccc;
   border-radius: 4px;
-  left: 88%;
+  left: 80%;
   margin-bottom: 1rem;
 }
 
@@ -710,6 +711,18 @@ div {
   background-color: #0056b3;
 }
 
+@media screen and (max-width: 600px) {
+  .custom-select-box {
+  position: relative;
+  width: 200px;
+  /* Adjust the width as needed */
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  left: 20%;
+  margin-bottom: 1rem;
+}
+}
 /*
 * --------------------------------------------------
 * routes/products.$handle.tsx
@@ -1085,6 +1098,107 @@ header nav>.header-menu.active>.drop-down {
 .icon-styling {
   padding-top: 10px;
   margin-right: 2rem;
+}
+
+.h3 {
+    font-family: var(--primary-font);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: .09375em;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+body #GiftCardPreview h1, body #GiftCardPreview h2, body #GiftCardPreview h3, body #mobile-banner-preview>div, body #PLPContainer .PlpTile .badge, body #shopify-section-header, body #shopify-section-universal-banner, body .btn, body .btn-block, body .btn-primary, body .collection-fallback-title h1, body .h1, body .h2, body .h3, body .h4, body .h5, body .h6, body .hero-button, body .l1-selection-tabs, body button:not([embeddedservice-chatheader_chatheader]):not([data-dropdownbutton]), body nav .main-nav__list>li>a {
+    font-family: var(--secondary-font);
+    text-transform: uppercase;
+}
+.h3--uppercase {
+    text-transform: uppercase;
+}
+.h3--center {
+    text-align: center;
+}
+.image-grid__card-wrapper {
+    display: flex;
+    grid-gap: 2rem;
+    gap: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; 
+  padding: 1px;
+  margin: 10px;
+  max-height: 100%; 
+}
+
+.card-image {
+  width: 100%; 
+  max-height: 100%;
+  margin-bottom: 10px;
+}
+
+.name {
+  text-align: center;
+  font-family: var(--primary-font);
+  margin-top: .3rem;
+  font-size: .8rem;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: .09375em;
+  color: #000;
+  padding: 0;
+}
+
+.zoom-effect {
+  overflow: hidden;
+  position: relative;
+}
+
+.zoom-effect:hover {
+  transform: scale(1.012); /* Adjust the scale factor for desired zoom effect */
+  transition: transform 0.5s ease;
+}
+
+
+@media screen and (max-width: 600px) {
+  .card {
+    max-width: 100%;
+  }
+  .card-image {
+    max-height:100%;
+  }
+  .image-grid__card-wrapper {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .h3 {
+    font-family: var(--primary-font);
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: .08375em;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+.name {
+  text-align: center;
+  font-family: var(--primary-font);
+  margin-top: .2rem;
+  font-size: .6rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: .08375em;
+  color: #000;
+}
 }
 
 .closeIcon {

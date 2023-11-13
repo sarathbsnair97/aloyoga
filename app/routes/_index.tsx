@@ -16,6 +16,8 @@ import { Video } from '@shopify/hydrogen';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { Section } from '~/components/elements/Section';
+import { Header } from '~/components/Header';
+import { Heading } from '~/components/elements/Heading';
 
 export const meta: V2_MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -23,8 +25,8 @@ export const meta: V2_MetaFunction = () => {
 
 export async function loader({context}: LoaderArgs) {
   const {storefront} = context;
-  const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes[0];
+  const { collections } = await storefront.query(COLLECTIONS_QUERY);
+  const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const bannerImages = await storefront.query(HOMEPAGE_SEO_QUERY, {
     variables: {
@@ -44,8 +46,9 @@ export default function Homepage() {
     <>
       <div className="home">
         <Carousel url={data?.imageDetails} />
+        <CollectionsImage featuredCollection={data.featuredCollection} />
         <SpreadMedia url={data.videoDetails}/>
-        <FeaturedCollection collection={data.featuredCollection} />
+        {/* <FeaturedCollection collection={data.featuredCollection} /> */}
         <RecommendedProducts products={data.recommendedProducts} />
       </div>
     </>
@@ -71,13 +74,48 @@ const SpreadMedia: React.FC<SpreadMediaProps> = ({ url }) => {
       </Link>
       </Section>
     );
-  }
+}
+  
+interface CollectionItem {
+  handle: string;
+  image: string | undefined;
+  title: string | undefined;
+}
 
-function FeaturedCollection({
-  collection,
-}: {
-  collection: FeaturedCollectionFragment;
-}) {
+interface CollectionsImageProps {
+  featuredCollection: CollectionItem[];
+}
+
+const CollectionsImage: React.FC<CollectionsImageProps> = ({ featuredCollection }) => {
+  return (
+    <Section>
+      <div className="row">
+        <div className="col-12">
+          <h2 className="h3 h3--uppercase h3--center">What are you looking for?</h2>
+        </div>
+      </div>
+
+      <div className="image-grid__card-wrapper">
+        {featuredCollection.map((item, index) => (
+          <div className="card" key={index}>
+            <Link to={`/collections/${item.handle}`}>
+              <Image
+                className='card-image zoom-effect'
+                data={item.image}
+                aspectRatio=".75"
+                />
+              <div className="name">
+                {item.title?.toUpperCase()}
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+};
+
+function FeaturedCollection() {
   if (!collection) return null;
   const image = collection?.image;
   return (
@@ -277,6 +315,24 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
 ` as const;
 
+const COLLECTIONS_QUERY = `#graphql
+  query FeaturedCollections {
+    collections(first: 4, query: "collection_type:smart") {
+      nodes {
+        id
+        title
+        handle
+         image {      
+            id
+            url
+            altText
+            width
+            height
+         }
+      }
+    }
+  }
+`;
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   fragment RecommendedProduct on Product {
     id
