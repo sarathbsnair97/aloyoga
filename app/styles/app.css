@@ -290,8 +290,8 @@ aside li {
   width: fit-content;
   border: 1px solid #dfdfdf;
   position: relative;
-  left: 8.6rem;
-  bottom: 6.2rem;
+  /* left: 8.6rem;
+  bottom: 6.2rem; */
 }
 
 .cart-discount {
@@ -1277,4 +1277,32 @@ header nav>.header-menu.active>.drop-down {
   line-height: 1.33;
   letter-spacing: .0916666667em;
   color: #000;
+}
+
+.empty-cart-styles {
+  margin-top: 70%;
+}
+
+.empty-heading-styles {
+  text-transform: uppercase;
+  margin-bottom: 2%;
+  margin-left: 25%;
+  font-family: var(--primary-font) !important;
+  font-weight: bold;
+}
+
+.empty-paragraph-styles {
+  margin-left: 11% !important;
+  margin-top: 2% !important;
+}
+
+.price-styles {
+  position: relative;
+  left: 11rem;
+  top: -1.3rem;
+}
+
+.list-styles {
+  position: relative;
+  top: -0.7rem;
 }
