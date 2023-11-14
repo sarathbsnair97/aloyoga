@@ -27,6 +27,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import { getVariantUrl } from '~/utils';
 import { Button } from 'reactstrap';
+import { Section } from '~/components/elements/Section';
 
 export const meta: V2_MetaFunction = ({ data }) => {
   return [{ title: `Hydrogen | ${data.product.title}` }];
@@ -124,38 +125,47 @@ export default function Product() {
           return <ProductImage image={item} />
         })}
       </div> */}
-      <ProductImage image={selectedVariant?.image} />
-      <ProductMain
-        selectedVariant={selectedVariant}
-        product={product}
-        variants={variants}
-      />
+      <div className='image-description-styles'>
+        <ProductImage image={selectedVariant?.image} />
+        <ProductMain
+          selectedVariant={selectedVariant}
+          product={product}
+          variants={variants}
+        />
+      </div>
       <br />
-      {/* <DescriptionMain
+      <hr style={{ borderColor: '#ccc' }} />
+      <DescriptionMain
         description={product.descriptionHtml}
-      /> */}
+        fit={product.fit}
+        fabrication={product.fabrication}
+      />
+      <hr style={{ borderColor: '#ccc' }} />
     </div>
   );
 }
 
-// function DescriptionMain({ description, fit, fabrication }) {
-//   return (
-//     <div className='description-box'>
-//       <h3>DESCRIPTION</h3>
-//       <div className='description' dangerouslySetInnerHTML={{ __html: description }}>
-//         {/* <h1>{description}</h1> */}
-//       </div>
-//       <div className='description-fit'>
-//         {/* <h1>{fit}</h1> */}
-//         <h1>FIT</h1>
-//       </div>
-//       <div className='description-fabrication'>
-//         {/* <h1>{fabrication}</h1> */}
-//         <h1>FABRICATION</h1>
-//       </div>
-//     </div>
-//   );
-// }
+function DescriptionMain({ description, fit, fabrication }) {
+  return (
+    <Section>
+      <div className='description-box'>
+        <div className='product-description' dangerouslySetInnerHTML={{ __html: description }}>
+          {/* <h1>{description}</h1> */}
+        </div>
+        <div className='description-fit'>
+          <h1>FIT</h1>
+          <div className='fit-description-styles' dangerouslySetInnerHTML={{ __html: fit.value }}>
+          </div>
+        </div>
+        <div className='description-fabrication'>
+          <h1>FABRICATION</h1>
+          <div className='fabrication-description-styles' dangerouslySetInnerHTML={{ __html: fabrication.value }}>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
 
 function ProductImage({ image }: { image: ProductVariantFragment['image'] }) {
   // function ProductImage({ image }) {
@@ -239,8 +249,6 @@ function ProductMain({
     </div>
   );
 }
-
-
 
 function ProductPrice({
   selectedVariant,
@@ -463,11 +471,17 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
 const PRODUCT_FRAGMENT = `#graphql
           fragment Product on Product {
             id
-    title
+            fit: metafield(namespace: "custom", key: "fit") {
+              value
+            }
+            fabrication: metafield(namespace: "custom", key: "fabrication") {
+              value 
+            }
+          title
           vendor
           handle
           descriptionHtml
-          description
+          description 
           media(first: 5) {
             edges {
             cursor
