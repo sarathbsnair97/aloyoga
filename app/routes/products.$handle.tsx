@@ -27,6 +27,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import { getVariantUrl } from '~/utils';
 import { Button } from 'reactstrap';
+import { Section } from '~/components/elements/Section';
 
 export const meta: V2_MetaFunction = ({ data }) => {
   return [{ title: `Hydrogen | ${data.product.title}` }];
@@ -146,21 +147,23 @@ export default function Product() {
 
 function DescriptionMain({ description, fit, fabrication }) {
   return (
-    <div className='description-box'>
-      <div className='product-description' dangerouslySetInnerHTML={{ __html: description }}>
-        {/* <h1>{description}</h1> */}
-      </div>
-      <div className='description-fit'>
-        <h1>FIT</h1>
-        <div className='fit-description-styles' dangerouslySetInnerHTML={{ __html: fit.value }}>
+    <Section>
+      <div className='description-box'>
+        <div className='product-description' dangerouslySetInnerHTML={{ __html: description }}>
+          {/* <h1>{description}</h1> */}
+        </div>
+        <div className='description-fit'>
+          <h1>FIT</h1>
+          <div className='fit-description-styles' dangerouslySetInnerHTML={{ __html: fit.value }}>
+          </div>
+        </div>
+        <div className='description-fabrication'>
+          <h1>FABRICATION</h1>
+          <div className='fabrication-description-styles' dangerouslySetInnerHTML={{ __html: fabrication.value }}>
+          </div>
         </div>
       </div>
-      <div className='description-fabrication'>
-        <h1>FABRICATION</h1>
-        <div className='fabrication-description-styles' dangerouslySetInnerHTML={{ __html: fabrication.value }}>
-        </div>
-      </div>
-    </div>
+    </Section>
   );
 }
 
