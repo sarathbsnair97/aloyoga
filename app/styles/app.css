@@ -528,7 +528,7 @@ aside li {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 100;
+  z-index: 0;
   cursor: pointer;
   padding: 15px 15px 0;
   content: url("../../public/images/heart.svg");
@@ -662,7 +662,7 @@ div {
   /* Adjust the width as needed */
   border: 1px solid #ccc;
   border-radius: 4px;
-  left: 80%;
+  left: 82%;
   margin-bottom: 1rem;
 }
 
