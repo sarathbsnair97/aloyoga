@@ -729,7 +729,7 @@ div {
 * --------------------------------------------------
 */
 .product {
-  display: grid;
+  /* display: grid; */
 
   @media (min-width: 45em) {
     grid-template-columns: 1fr 1fr;
@@ -753,8 +753,8 @@ div {
 }
 
 .product-main {
-  align-self: start;
-  position: sticky;
+  /* align-self: start; */
+  /* position: sticky; */
   top: 6rem;
   width: 25rem;
   margin-left: 10rem;
@@ -1037,6 +1037,7 @@ header nav>.header-menu.active>.drop-down {
   margin-left: -15px;
   margin-bottom: ;
 } */
+
 .footer-items {
   display: flex;
   justify-content: space-around;
@@ -1419,4 +1420,63 @@ body #GiftCardPreview h1, body #GiftCardPreview h2, body #GiftCardPreview h3, bo
 .list-styles {
   position: relative;
   top: -0.7rem;
+}
+
+.image-description-styles {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 2rem 2rem;
+}
+
+.description-box {
+  /* display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 4rem; */
+  font-family: var(--primary-font);
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3rem;
+}
+
+.product-description {
+  width: 33.3%;
+  margin-left: 50px;
+}
+
+.description-fit {
+  width: 25%;
+  margin-left: 5rem;
+}
+
+.description-fabrication {
+  width: 25%;
+  margin-left: 5rem;
+}
+
+.list-styles-disk {
+  list-style-type: disc;
+}
+
+.h4--black {
+  font-family: var(--secondary-font);
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.21;
+  letter-spacing: .0892857143em;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.small-p {
+  color: #605e5c;
+  margin-top: 5%;
+}
+
+.fit-description-styles {
+  color: rgb(96, 94, 92);
+}
+
+.fabrication-description-styles {
+  color: rgb(96, 94, 92);
 }
