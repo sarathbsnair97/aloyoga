@@ -13,25 +13,25 @@ const CollectionFilter: React.FC = () => {
     {
       label: 'Price: High to Low',
       value: 'PRICE',
-      booleanValue: false,
+      booleanValue: true,
       id: 'price_high',
     },
     {
       label: 'Price: Low to High',
       value: 'PRICE',
-      booleanValue: true,
+      booleanValue: false,
       id: 'price_low',
     },
     {
       label: 'Best selling',
       value: 'BEST_SELLING',
-      booleanValue: true,
+      booleanValue: false,
       id: 'best_selling',
     },
     // { label: 'Featured', value: 'MANUAL', booleanValue: true, id: 'featured' },
     // { label: 'Alphabetically: A-Z', value: 'TITLE', booleanValue: false, id: 'alpha_az' },
     // { label: 'Alphabetically: Z-A', value: 'TITLE', booleanValue: true, id: 'alpha_za' },
-    {label: 'Newest', value: 'CREATED', booleanValue: false, id: 'newest'},
+    { label: 'Newest', value: 'CREATED', booleanValue: true, id: 'newest'},
   ];
 
   const placeholderOption: Option = {
@@ -48,7 +48,7 @@ const CollectionFilter: React.FC = () => {
   const location = useLocation();
 
   const updateURL = (option: Option) => {
-    params.set('sort_by', option.value);
+    params.set('sortkey', option.value);
     params.set('reverse', option.booleanValue.toString());
     return `${location.pathname}?${params.toString()}`;
   };

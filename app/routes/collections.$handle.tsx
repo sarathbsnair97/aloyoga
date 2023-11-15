@@ -217,9 +217,8 @@ function ProductItem({
   const colorVariable: { [key: string]: string } = colorObject ? { [colorObject.name]: colorObject.value } : {};
   const [color, setColor] = useState(colorVariable.Color);
   const [sizeValue, setSize] = useState(sizeVariable.Size);
-  var variantsCount = product.variants.nodes.length;
   const uniqueColors = Array.from(new Set(product.variants.nodes.map(item => item.selectedOptions.find(option => option.name === 'Color')?.value)));
-
+  var colorCount = uniqueColors.length;
   const uniqueProducts = uniqueColors.map(color =>
     product.variants.nodes.find(item => item.selectedOptions.find(option => option.name === 'Color')?.value === color)
   );
@@ -254,12 +253,12 @@ function ProductItem({
             color={color}
           />
           {
-            variantsCount >= 8 ? <Link
+            colorCount >= 8 ? <Link
               className="product-item"
               key={product.id}
               prefetch="intent"
               to={variantUrl}
-            ><h4 style={{ marginTop: '0.8rem' }}>+{variantsCount}</h4></Link> : ""
+            ><h4 style={{ marginTop: '0.8rem' }}>+{colorCount}</h4></Link> : ""
           }
         </div>
         <Link
