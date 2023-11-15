@@ -735,7 +735,7 @@ div {
 
 .product-image img {
   height: auto;
-  width: 80%;
+  width: 80% !important;
   margin-left: 4rem;
 }
 
