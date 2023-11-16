@@ -233,7 +233,6 @@ function ProductMain({
       <div className="free-shipping-description">
         <img src="https://cdn.shopify.com/s/files/1/2185/2813/files/truck_cart.png?v=1663703912" width="22" alt="" />
         <span style={{ marginLeft: "10px" }}>Free Shipping and Easy Returns.</span>
-        <a>Read More</a>
       </div>
     </div>
   );
