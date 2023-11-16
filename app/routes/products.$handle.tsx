@@ -230,16 +230,6 @@ function ProductMain({
         </Await>
       </Suspense>
       <br />
-      {/* <SizeSelector
-        product={product}
-      /> */}
-      {/* <br />
-      <p>
-        <strong>Description</strong>
-      </p>
-      <br />
-      <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
-      <br /> */}
       <div className="free-shipping-description">
         <img src="https://cdn.shopify.com/s/files/1/2185/2813/files/truck_cart.png?v=1663703912" width="22" alt="" />
         <span style={{ marginLeft: "10px" }}>Free Shipping and Easy Returns.</span>
@@ -329,7 +319,6 @@ function ProductForm({
 }
 
 function SizeSelector({ option }) {
-  // console.log(sizeData);
   return (
     //   <div className='size-elements'>
     //     {sizeData[0]?.values?.map((item) => {
