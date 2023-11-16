@@ -176,7 +176,6 @@ function ProductImage({ image }: { image: ProductVariantFragment['image'] }) {
     <div className="product-image" >
       <Image
         alt={image.altText || 'Product Image'}
-        aspectRatio="1/1"
         data={image}
         key={image.id}
         // data={image.node}
